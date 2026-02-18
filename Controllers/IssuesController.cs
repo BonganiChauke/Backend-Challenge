@@ -76,5 +76,68 @@ namespace Backend_Challenge.Controllers
             return Ok("Issue created successfully.");
         }
 
+        // http get method to retrieve all issues
+        [HttpGet]
+        public IActionResult GetIssues()
+        {
+            // try catch for error handling
+            try
+            {
+                // here you would typically retrieve the issues from the database using the connection string
+                // for demonstration purposes, we will just return a sample list of issues
+                List<IssuesCr> issuesList = new List<IssuesCr>();
+
+                //try catch for database connection and retrieval
+                try
+                {
+                    // connecting to the database using the connection string
+                    using (var connection = new SqlConnection(_connectionString))
+                    {
+                        // open the connection to db
+                        connection.Open();
+                        // query to select all issues from the database
+                        string query = "SELECT id, title, description, status, createdAt FROM Issues";
+                        // create a sql command with the query and connection
+                        using (var command = new SqlCommand(query, connection))
+                        {
+                            // execute the command and read the results
+                            using (var reader = command.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    // create an issue object from the data and add it to the list
+                                    var issue = new IssuesCr
+                                    {
+                                        id = reader.GetInt32(0),
+                                        title = reader.GetString(1),
+                                        description = reader.GetString(2),
+                                        status = reader.GetString(3),
+                                        createdAt = reader.GetDateTime(4)
+                                    };
+                                    issuesList.Add(issue);
+                                }
+                            }
+                        }
+                        // close the connection after use
+                        connection.Close();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    // log the exception
+                    ModelState.AddModelError("Exception", ex.Message);
+                    return BadRequest(ModelState);
+                }
+
+                return Ok(issuesList);
+            }
+            catch (Exception ex)
+            {
+                // log the exception
+                ModelState.AddModelError("Exception", ex.Message);
+                return BadRequest(ModelState);
+            }
+        }
     }
 }
