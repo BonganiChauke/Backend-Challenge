@@ -56,25 +56,29 @@ dotnet restore
   }
 }
 ```
-4. **Create and migrate the database**
-``` bash
-dotnet ef migrations add InitialCreate
-dotnet ef database update
-```
 
-5. **Run the API**
-```bash
-dotnet run
-# or
-dotnet watch run
-```
 
 6. ** The API should now be running at:**
 - (http)[http://localhost:5123]
 - (https)[https://localhost:7123]
 
-## License 
-- MIT License feel free to use for learning purposes.
+## Contributing
+- Contributions are welcome and appreciated!
+- Fork the repository
+- Create your feature branch (git checkout -b feature/amazing-feature)
+- Commit your changes (git commit -m 'Add some amazing feature')
+- Push to the branch (git push origin feature/amazing-feature)
+- Open a Pull Request
+  
+### Please
+- Follow the existing code style
+- Add comments for new logic
+- Update the README if you add/remove features
+
+## License
+- This project is licensed under the MIT License – see the LICENSE file for details.
+- You are free to use, modify, distribute, and sell this software (with or without changes), as long as you include the original copyright and license notice.
+- [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
 
