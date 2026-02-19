@@ -37,7 +37,7 @@ namespace Backend_Challenge.Controllers
                     connection.Open();
 
                     // query to insert the issue into the database
-                    string query = "INSERT INTO Issues (title, description, status, createdAt) VALUES (@title, @description, @status, @createdAt)";
+                    string query = "INSERT INTO Issues (title, description, status) VALUES (@title, @description, @status)";
 
 
                     // create a sql command with the query and connection
@@ -47,7 +47,6 @@ namespace Backend_Challenge.Controllers
                         command.Parameters.AddWithValue("@title", issues.title);
                         command.Parameters.AddWithValue("@description", issues.description);
                         command.Parameters.AddWithValue("@status", "Open"); // default status
-                        command.Parameters.AddWithValue("@createdAt", DateTime.UtcNow); // current time
                         // execute the command to insert the issue into the database
                         command.ExecuteNonQuery();
                     }
