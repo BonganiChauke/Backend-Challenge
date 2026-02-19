@@ -194,5 +194,48 @@ namespace Backend_Challenge.Controllers
             }
         }
 
+        // http put method to update an existing issue
+        [HttpPut("{id}")]
+        public IActionResult UpdateIssue(int id, Issues issues)
+        {
+            // try catch for error handling
+            try
+            {
+                // connecting to the database using the connection string
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    // open the connection to db
+                    connection.Open();
+                    // query to update the issue with the specified id in the database
+                    string query = "UPDATE Issues SET title=@title, description=@description, status=@status WHERE id=@id";
+                    // create a sql command with the query and connection
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        // add parameters to the command to prevent sql injection
+                        command.Parameters.AddWithValue("@id", id);
+                        command.Parameters.AddWithValue("@title", issues.title);
+                        command.Parameters.AddWithValue("@description", issues.description);
+                        command.Parameters.AddWithValue("@status", issues.status);
+                        // execute the command to update the issue in the database
+                        int rowsAffected = command.ExecuteNonQuery();
+                        if (rowsAffected == 0)
+                        {
+                            return NotFound("Issue not found.");
+                        }
+                    }
+                    // close the connection after use
+                    connection.Close();
+                }
+                return Ok("Issue updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                // log the exception
+                ModelState.AddModelError("Exception", ex.Message);
+                return BadRequest(ModelState);
+            }
+
+        }
+
     }
 }
