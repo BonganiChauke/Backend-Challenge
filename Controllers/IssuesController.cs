@@ -237,5 +237,46 @@ namespace Backend_Challenge.Controllers
 
         }
 
+        // http delete method to delete an issue by id
+        [HttpDelete("{id}")]
+        public IActionResult DeleteIssue(int id) {
+
+            // try catch for error handling
+            try
+            {
+                // connecting to the database using the connection string
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    // open the connection to db
+                    connection.Open();
+                    // query to delete the issue with the specified id from the database
+                    string query = "DELETE FROM Issues WHERE id=@id";
+                    // create a sql command with the query and connection
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        // add parameter to the command to prevent sql injection
+                        command.Parameters.AddWithValue("@id", id);
+                        // execute the command to delete the issue from the database
+                        int rowsAffected = command.ExecuteNonQuery();
+                        if (rowsAffected == 0)
+                        {
+                            return NotFound("Issue not found.");
+                        }
+                    }
+                    // close the connection after use
+                    connection.Close();
+                }
+
+                return Ok("Issue deleted successfully.");
+            }
+            catch (Exception ex)
+            {
+                // log the exception
+                ModelState.AddModelError("Exception", ex.Message);
+                return BadRequest(ModelState);
+            }
+        }
+
+
     }
 }
