@@ -139,5 +139,61 @@ namespace Backend_Challenge.Controllers
                 return BadRequest(ModelState);
             }
         }
+
+        // http function to get a specific issue by id
+        [HttpGet("{id}")]
+        public IActionResult GetIssueById(int id)
+        {
+            // class instance to hold the issue data
+            IssuesCr issuesCr = new IssuesCr();
+
+            // try catch for error handling
+            try
+            {
+
+                // connecting to the database using the connection string
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    // open the connection to db
+                    connection.Open();
+                    // query to select the issue with the specified id from the database
+                    string query = "SELECT id, title, description, status, createdAt FROM Issues WHERE id=@id";
+                    // create a sql command with the query and connection
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        // add parameter to the command to prevent sql injection
+                        command.Parameters.AddWithValue("@id", id);
+                        // execute the command and read the result
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // create an issue object from the data
+                                issuesCr.id = reader.GetInt32(0);
+                                issuesCr.title = reader.GetString(1);
+                                issuesCr.description = reader.GetString(2);
+                                issuesCr.status = reader.GetString(3);
+                                issuesCr.createdAt = reader.GetDateTime(4);
+                            }
+                            else
+                            {
+                                return NotFound("Issue not found.");
+                            }
+                        }
+                    }
+                    // close the connection after use
+                    connection.Close();
+                }
+
+                return Ok(issuesCr);
+            }
+            catch (Exception ex)
+            {
+                // log the exception
+                ModelState.AddModelError("Exception", ex.Message);
+                return BadRequest(ModelState);
+            }
+        }
+
     }
 }
