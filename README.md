@@ -34,6 +34,27 @@
 ### Installation & Running Locally
 
 ## Project Structure
+```text
+Backend Challenge (solution)
+└── Backend Challenge (project)
+    ├── Controllers/
+    │   └── IssuesController.cs           # REST API endpoints (CRUD operations)
+    ├── Models/
+    │   ├── Issues.cs                     # Main entity / database model
+    │   └── IssuesCr.cs                   # DTO or model for creating issues
+    ├── Properties/
+    │   └── launchSettings.json           # IIS Express / launch profiles & ports
+    ├── Configuration files
+    │   ├── appsettings.json              # Production / base configuration
+    │   └── appsettings.Development.json  # Development settings (connection string, etc.)
+    ├── Root files
+    │   ├── Program.cs                    # Application entry point & configuration
+    │   ├── Backend Challenge.http        # REST Client file (for testing in VS)
+    │   ├── README.md                     # This documentation file
+    │   ├── SQLQuery.sql                  # SQL scripts (table creation, tests, etc.)
+    │   ├── .gitignore                    # Files & folders ignored by Git
+    │   └── .gitattributes                # Git line-ending & attribute rules
+```
 
 1. **Clone the repository**
 
