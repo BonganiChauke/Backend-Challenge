@@ -59,8 +59,8 @@ Backend Challenge (solution)
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/yourusername/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/BonganiChauke/Backend-Challenge.git
+cd Backend-Challenge.git
 ```
 
 2. **Restore dependencies**
@@ -80,8 +80,8 @@ dotnet restore
 
 
 6. ** The API should now be running at:**
-- (http)[http://localhost:5123]
-- (https)[https://localhost:7123]
+- http://localhost:5123
+- https://localhost:7123
 
 ## Contributing
 - Contributions are welcome and appreciated!
