@@ -27,9 +27,23 @@
 
 ### Prerequisites
 
-- .NET 8 SDK (or .NET 6/7 depending on your target)
-- SQL Server 2019+ or SQL Server Express
--  Visual Studio 2022
+- **Windows 10 or 11**  
+- **.NET SDK 6.x – 7.x**  
+- **Visual Studio 2022 or newer**  
+  (with **ASP.NET and web development** workload installed)  
+  → [Download Visual Studio 2022 Community (free)](https://visualstudio.microsoft.com/vs/community/)  
+  During installation, select the "ASP.NET and web development" workload.
+
+- **SQL Server**  
+  Choose one of the following free options:  
+  - **SQL Server Developer Edition** 
+    → [Download SQL Server 2025 Developer](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) (scroll to Developer edition)  
+
+- **SQL Server Management Studio (SSMS)**  
+  → [Download latest SSMS 22.x (recommended)](https://aka.ms/ssms/22/release/vs_SSMS.exe)  
+  (Direct installer from Microsoft – run and install)
+
+
 
 ### Installation & Running Locally
 
