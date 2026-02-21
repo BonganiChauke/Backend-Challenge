@@ -70,8 +70,6 @@ namespace Backend_Challenge.Controllers
                 return BadRequest(ModelState);
             }
 
-            // here you would typically save the issue to the database using the connection string
-            // for demonstration purposes, we will just return a success response
             return Ok("Issue created successfully.");
         }
 
@@ -82,8 +80,8 @@ namespace Backend_Challenge.Controllers
             // try catch for error handling
             try
             {
-                // here you would typically retrieve the issues from the database using the connection string
-                // for demonstration purposes, we will just return a sample list of issues
+
+                // list of issues
                 List<IssuesCr> issuesList = new List<IssuesCr>();
 
                 //try catch for database connection and retrieval
