@@ -90,7 +90,27 @@ Visual Studio is needed for .NET development, including web and desktop apps tha
 4. Complete installation and launch:  
    - Once done, launch Visual Studio from the Start menu.
 
-## 2. Get the Project (Continued)
+## 2. Get the Project
+### Option A: Git
+
+Cloning via Git keeps the project up-to-date and makes it easy to pull future changes.
+
+1. Open a terminal or PowerShell:  
+   - Windows: Search for "PowerShell" or "Command Prompt" in the Start menu.  
+   - (Tip: Use PowerShell for better Git experience.)
+
+2. Navigate to your desired parent folder:  
+   ```powershell
+   cd C:\Projects
+   ```
+3. Clone the repository:
+     ``` PowerShell
+     git clone https://github.com/BonganiChauke/Backend-Challenge.git
+     ```
+4. Enter the project folder:
+``` Powershell
+  cd Backend-Challenge
+```
 
 ### Option B: ZIP Download (Quick, No Git Needed)
 
