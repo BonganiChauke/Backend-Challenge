@@ -44,10 +44,108 @@
   (Direct installer from Microsoft – run and install)
 
 
+## Installation & Running Locally
 
-### Installation & Running Locally
+## Step-by-Step Installation Guide  
+**SQL Server Management Studio (SSMS) & Visual Studio**
 
-## Project Structure
+### 1. Install SQL Server Management Studio (SSMS)
+
+SSMS is the primary tool for managing SQL Server databases.
+
+1. Go to the official Microsoft documentation page:  
+   [https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
+
+2. Download the latest installer (SSMS 22):  
+   Click the download link for **SQL Server Management Studio 22** → [Direct download (vs_SSMS.exe)](https://aka.ms/ssms/22/release/vs_SSMS.exe)  
+   *(This is a small bootstrapper that uses the Visual Studio Installer engine.)*
+
+3. Run the downloaded file (`vs_SSMS.exe`):  
+   - It will launch the Visual Studio Installer.  
+   - Follow the prompts (administrator rights required).  
+   - You can optionally select additional components or language packs.  
+   - Click **Install** and wait for completion.
+
+4. Launch SSMS:  
+   After installation finishes, search for "SQL Server Management Studio" in the Start menu and open it.
+
+### 2. Install Visual Studio
+
+Visual Studio is needed for .NET development, including web and desktop apps that connect to SQL.
+
+1. Go to the official Visual Studio downloads page:  
+   [https://visualstudio.microsoft.com/downloads/](https://visualstudio.microsoft.com/downloads/)  
+   or directly to the Community edition:  
+   [https://visualstudio.microsoft.com/vs/community/](https://visualstudio.microsoft.com/vs/community/)
+
+2. Download **Visual Studio Community** (free edition):  
+   - Click **Free download** under Community.  
+   - This downloads the web installer (`vs_community.exe` or similar).  
+
+3. Run the installer and select workloads:  
+   - In the Visual Studio Installer, go to the **Workloads** tab.  
+   - **Required**: Check **ASP.NET and web development** (for web apps, APIs, Blazor, etc.).   
+   - Click **Install**.
+
+4. Complete installation and launch:  
+   - Once done, launch Visual Studio from the Start menu.
+
+## 2. Get the Project (Continued)
+
+### Option B: ZIP Download (Quick, No Git Needed)
+
+1. Go to the repository on GitHub:  
+   [https://github.com/BonganiChauke/Backend-Challenge](https://github.com/BonganiChauke/Backend-Challenge)
+
+2. Click the green **Code** button → **Download ZIP**.
+
+3. Extract the ZIP file to a local folder of your choice:  
+   Example: `C:\Projects\Backend-Challenge`
+
+4. Open the extracted folder — inside you'll find:  
+   - `Backend Challenge.sln` (the Visual Studio solution file)  
+   - Source code folders, `appsettings.json`, etc.
+
+### 3. Open and Run the Project in Visual Studio
+
+This project is an **ASP.NET Core Web API** called **Issue Tracker**, built with .NET, Entity Framework Core, and SQL Server.
+
+1. Launch **Visual Studio** (2022 or newer recommended).
+
+2. Open the solution file:  
+   - Go to **File** → **Open** → **Project/Solution**  
+   - Navigate to your extracted/cloned folder (e.g., `C:\Projects\Backend-Challenge`)  
+   - Select **Backend Challenge.sln** → click **Open**
+
+3. Restore NuGet packages:  
+   - Visual Studio typically restores them automatically when the solution opens.  
+   - If you see red squiggles or errors:  
+     Right-click the solution in **Solution Explorer** → **Restore NuGet Packages**  
+     Wait until the process completes (check the **Output** window → Package Manager).
+
+4. Build the solution:  
+   - Go to **Build** → **Build Solution** (or press **Ctrl+Shift+B**)  
+   - Watch for any build errors in the **Error List** window.  
+     Common fixes:  
+     - Missing .NET SDK → install the version listed in the project file  
+     - NuGet restore failed → try restoring again or clear NuGet cache
+
+5. Set the startup project (if necessary):  
+   - In **Solution Explorer**, right-click the project named **Backend Challenge**  
+   - Select **Set as Startup Project**  
+
+6. Configure the database connection (very important!):  
+   - Open `appsettings.json` or `appsettings.Development.json` in the project.  
+   - Update (or verify) the **ConnectionStrings** section to match your local SQL Server setup:
+
+     ```json
+     "ConnectionStrings": {
+       "DefaultConnection": "Server=.\\SQLEXPRESS;Database=IssueTrackerDb;Trusted_Connection=True;TrustServerCertificate=True;"
+     }
+     ```
+
+     
+### Project Structure
 ```text
 Backend Challenge (solution)
 └── Backend Challenge (project)
@@ -69,33 +167,6 @@ Backend Challenge (solution)
     │   ├── .gitignore                    # Files & folders ignored by Git
     │   └── .gitattributes                # Git line-ending & attribute rules
 ```
-
-1. **Clone the repository**
-
-```bash
-git clone https://github.com/BonganiChauke/Backend-Challenge.git
-cd Backend-Challenge.git
-```
-
-2. **Restore dependencies**
-``` bash
-dotnet restore
-```
-
-3. **Update connection string**
-- Open appsettings.json (or appsettings.Development.json) and set your SQL Server connection:
-``` json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=IssueTrackerDb;Trusted_Connection=True;TrustServerCertificate=True;"
-  }
-}
-```
-
-
-6. ** The API should now be running at:**
-- http://localhost:5123
-- https://localhost:7123
 
 ## Contributing
 - Contributions are welcome and appreciated!
