@@ -150,20 +150,60 @@ This project is an **ASP.NET Core Web API** called **Issue Tracker**, built with
      - Missing .NET SDK → install the version listed in the project file  
      - NuGet restore failed → try restoring again or clear NuGet cache
 
-5. Set the startup project (if necessary):  
+5. Set the startup project:  
    - In **Solution Explorer**, right-click the project named **Backend Challenge**  
    - Select **Set as Startup Project**  
 
-6. Configure the database connection (very important!):  
-   - Open `appsettings.json` or `appsettings.Development.json` in the project.  
-   - Update (or verify) the **ConnectionStrings** section to match your local SQL Server setup:
+### 6. Prepare the Database and Run SQL Scripts
+- The repository includes `SQLQuery.sql`, which contains the database creation scripts, table definitions, and test data inserts. Follow these steps to set up your local database.
 
-     ```json
-     "ConnectionStrings": {
-       "DefaultConnection": "Server=.\\SQLEXPRESS;Database=IssueTrackerDb;Trusted_Connection=True;TrustServerCertificate=True;"
-     }
+### A. Create a Local SQL Server Database (Using SSMS)
+
+1. Open **SQL Server Management Studio (SSMS)** and connect to your local SQL Server instance:  
+   - Examples:  
+     - `(localdb)\MSSQLLocalDB` (LocalDB)  
+     - `.\SQLEXPRESS` (Express named instance)  
+     - `localhost` or `.` (default instance)
+
+2. In **Object Explorer**, right-click **Databases** → **New Database…**
+
+3. In the dialog:  
+   - Database name: `BackendChallengeDB` (or any name you prefer, e.g., `IssueTrackerDb`)  
+   - Leave other settings as default  
+   - Click **OK**
+
+### B. Run SQL Scripts (`SQLQuery.sql`)
+
+There are two main ways to execute the script.
+
+#### Method 1: SSMS Graphical Execution (Recommended)
+
+1. In SSMS, make sure you're still connected to your server.
+
+2. Open the script file:  
+   - Go to **File** → **Open** → **File…**  
+   - Navigate to the repository folder and select `SQLQuery.sql`  
+   - Click **Open**
+
+3. Ensure the correct database is selected:  
+   - In the toolbar, use the dropdown next to the Execute button to select `BackendChallengeDB` (or your chosen database name)
+
+4. Execute the script:  
+   - Press **F5**, or click the **Execute** button (lightning icon)  
+   - Wait for the “Command(s) completed successfully” message in the Messages pane
+
+#### Method 2: Command Line with `sqlcmd` (Optional)
+
+If you prefer the terminal:
+
+1. Open **Command Prompt** or **PowerShell** as Administrator.
+
+2. Run one of the following commands (adjust paths and database name):
+
+   - For default/local instance:
+     ```cmd
+      -S localhost -d BackendChallengeDB -i "C:\Projects\Backend-Challenge\SQLQuery.sql"
      ```
-
      
 ### Project Structure
 ```text
