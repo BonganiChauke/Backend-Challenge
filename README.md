@@ -217,6 +217,66 @@ If you prefer the terminal:
      ```sql
      SELECT * FROM Issues;
      ```
+
+### 5. Verify API Endpoints
+
+Once the project is running and the database is set up, test that the API endpoints are working correctly.  
+The repository includes a file named `Backend Challenge.http` (an HTTP request file) that you can use directly in Visual Studio.
+
+### Using the Built-in HTTP File (Recommended in Visual Studio)
+
+1. In **Solution Explorer**, locate and double-click the file:  
+   `Backend Challenge.http`  
+   (It’s usually in the root of the project or in a `tests`/`docs` folder.)
+
+2. Visual Studio’s built-in **REST Client** will open the file with clickable "Send Request" links next to each request.
+
+3. Make sure the API is running:  
+   - Press **F5** to start the project (or use the green **Start** button)  
+   - Wait until Swagger or the browser opens (confirm the server is listening on http://localhost:5123 or https://localhost:7123)
+
+4. In the `.http` file, click **Send Request** next to each example to test:  
+   - The requests should execute against your running API  
+   - Check the response pane for status codes (200 OK, 201 Created, etc.) and JSON results
+
+   This file typically includes pre-configured requests for all CRUD operations on the **Issues** resource.
+
+#### Typical Endpoints to Verify
+
+These are the standard RESTful routes you should see working (exact paths depend on the `IssuesController.cs` implementation):
+
+- **GET** `/api/issues`  
+  → Retrieve all issues (list)
+
+- **GET** `/api/issues/{id}`  
+  → Retrieve a single issue by ID  
+  Example: `/api/issues/1`
+
+- **POST** `/api/issues`  
+  → Create a new issue  
+  (Send a JSON body with properties like title, description, status, priority, etc.)
+
+- **PUT** `/api/issues/{id}`  
+  → Update an existing issue  
+  (Send updated JSON body)
+
+- **DELETE** `/api/issues/{id}`  
+  → Delete an issue by ID
+
+#### Alternative: Test with Postman or Browser/Swagger
+
+- If the `.http` file is missing or you prefer another tool:  
+  - Open **Swagger UI** (usually auto-launched at `https://localhost:7123/swagger` or `http://localhost:5123/swagger`)  
+  - Use the interactive interface to try each endpoint directly (expand → Try it out → Execute)
+
+- Or import the `.http` file into **Postman** (Postman supports HTTP file import via "Import" → "Raw text" or file upload)
+
+##### What to Check After Each Request
+
+- **200 OK** or **201 Created** → success  
+- **404 Not Found** → ID doesn’t exist (normal for GET/DELETE on missing items)  
+- **400 Bad Request** → invalid input (check JSON format/body)  
+- **500 Internal Server Error** → check Visual Studio Output window or console for exceptions (common: DB connection issues)
      
 ### Project Structure
 ```text
