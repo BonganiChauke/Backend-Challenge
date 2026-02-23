@@ -128,8 +128,6 @@ Cloning via Git keeps the project up-to-date and makes it easy to pull future ch
 
 ### 3. Open and Run the Project in Visual Studio
 
-This project is an **ASP.NET Core Web API** called **Issue Tracker**, built with .NET, Entity Framework Core, and SQL Server.
-
 1. Launch **Visual Studio** (2022 or newer recommended).
 
 2. Open the solution file:  
@@ -168,7 +166,7 @@ This project is an **ASP.NET Core Web API** called **Issue Tracker**, built with
 2. In **Object Explorer**, right-click **Databases** → **New Database…**
 
 3. In the dialog:  
-   - Database name: `BackendChallengeDB` (or any name you prefer, e.g., `IssueTrackerDb`)  
+   - Database name: `DB_API` (or any name you prefer, e.g., `IssueTrackerDb`)  
    - Leave other settings as default  
    - Click **OK**
 
@@ -186,7 +184,7 @@ There are two main ways to execute the script.
    - Click **Open**
 
 3. Ensure the correct database is selected:  
-   - In the toolbar, use the dropdown next to the Execute button to select `BackendChallengeDB` (or your chosen database name)
+   - In the toolbar, use the dropdown next to the Execute button to select `DB_API` (or your chosen database name)
 
 4. Execute the script:  
    - Press **F5**, or click the **Execute** button (lightning icon)  
@@ -203,6 +201,21 @@ If you prefer the terminal:
    - For default/local instance:
      ```cmd
       -S localhost -d BackendChallengeDB -i "C:\Projects\Backend-Challenge\SQLQuery.sql"
+     ```
+### Confirm Schema and Test Data
+
+1. In SSMS **Object Explorer**:
+
+   - Expand **Databases** → **BackendChallengeDB** → **Tables**  
+   - Verify that the expected tables exist (e.g., `Issues`, and any lookup or supporting tables such as users, priorities, statuses, etc., depending on the script)
+
+2. Run a quick test query to confirm data was inserted:
+
+   - Open a new query window in SSMS (ensure it is connected to the `DB_API` database — check the database dropdown in the toolbar)  
+   - Paste and execute the following SQL:
+
+     ```sql
+     SELECT * FROM Issues;
      ```
      
 ### Project Structure
